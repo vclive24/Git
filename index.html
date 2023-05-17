@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>adv-url - URL Shortener</title>
+  <style>
+    body {
+      background-color: pink;
+    }
+    .container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .short-url {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>adv-url - URL Shortener</h1>
+    
+    <input type="text" id="long-url" placeholder="Enter your long URL" style="margin-bottom: 10px;">
+    <br>
+    <button onclick="generateRedirectUrl()">Shorten</button>
+    <br>
+    <br>
+    <div id="short-url" class="short-url"></div>
+    <br>
+    <button onclick="copyShortUrl()" id="copy-short-url" style="display: none;">Copy Short URL</button>
+  </div>
+  
+  <script>
+    let shortUrl = "";
+
+    function generateRedirectUrl() {
+      const longUrl = document.getElementById("long-url").value;
+      const registrationDomain = "example.com"; // Replace with your registration domain
+
+      // Check if the long URL belongs to the registration domain
+      if (!longUrl.includes(registrationDomain)) {
+        alert("This URL does not belong to the registration domain. Please contact AMAN- +8801306981347 (WhatsApp).");
+        return;
+      }
+
+      const event = "comments";
+      const redirToken = "QUFFLUhqbDdmVkxaTEQ3aWVTcVJUNDhGb2xHUkotWVg4Z3xBQ3Jtc0trVWhSUUhHS05DUF85Ql9td2lOMmlTNkEzWmFON09NTnA1OHZVbG5Sd0hPLVpwSi1ubEZJdzFNWVVyQTlibW9wZFp5N1lUdWdmd25XVGc0bms4dF9yZXBTVmd5aUhmVHNNdzU5cjFGb0VjMFQtVHlLRQ&q";
+      shortUrl = "https://alt00534634.youtube.com/redirect?q=" + encodeURIComponent(longUrl) + "&event=" + event + "&redir_token=" + redirToken + "&html_redirect=1";
+
+      const shortUrlElement = document.getElementById("short-url");
+      shortUrlElement.innerText = "Short URL: " + shortUrl;
+
+      document.getElementById("copy-short-url").style.display = "inline";
+    }
+
+    function copyShortUrl() {
+      const copyText = document.createElement("textarea");
+      copyText.value = shortUrl;
+      document.body.appendChild(copyText);
+      copyText.select();
+      document.execCommand("copy");
+      document.body.removeChild(copyText);
+
+      alert("Short URL copied to clipboard: " + shortUrl);
+    }
+  </script>
+</body>
+</html>
